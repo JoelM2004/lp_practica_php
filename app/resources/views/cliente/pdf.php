@@ -1,12 +1,17 @@
 <?php
-require_once 'dompdf/autoload.inc.php';
-
+// require_once 'dompdf/autoload.inc.php';
+//mensaje nuevo
 ob_start();
 
 ?>
 
 <body>
+
+
     <h1>Hola mundo</h1>
+
+
+
 </body>
 
 <?php
