@@ -1,0 +1,15 @@
+{
+    "name": "laboratorio/clientes",
+    "description": "Sistema de Gesstión de clientes",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "",
+            "app\\core\\": "core/",
+            "app\\libs\\": "libs/"
+        }
+    },
+    "require": {
+        "dompdf/dompdf": "^3.0"
+    }
+}
