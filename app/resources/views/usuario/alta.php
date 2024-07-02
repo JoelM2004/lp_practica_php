@@ -101,7 +101,7 @@
   </form>
 
   <div class="col-1 p-10">
-    <table class="table table-dark">
+    <table id="tablaUsuario" class="table table-dark">
       <thead>
         <tr>
           <th colspan="9">
@@ -109,6 +109,7 @@
           </th>
 
           <th colspan="2">
+          <button type="button" id="imprimirUsuarios"> Imprimir Usuarios</button>
             <a target="_blank" href="<?= APP_FRONT . "usuario/pdf" ?>">Generar PDF</a>
           </th>
 

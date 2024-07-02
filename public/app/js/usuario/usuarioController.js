@@ -371,7 +371,97 @@ let userController = {
     //   }, 300);
      }
 
+  },
+  print:()=> {
+    const $elementoParaConvertir = document.getElementById("tablaUsuario"); // <-- Aquí puedes elegir cualquier elemento del DOM
+  
+    // Crear un contenedor temporal para añadir el título y la fecha
+    const tempContainer = document.createElement('div');
+  
+    // Crear y añadir el título
+    const title = document.createElement('h1');
+    title.innerText = 'Listado de Usuarios';
+    tempContainer.appendChild(title);
+  
+    // Crear y añadir la fecha de emisión
+    const date = document.createElement('p');
+    const today = new Date();
+    date.innerText = 'Fecha de emisión del reporte: ' + today.toLocaleDateString();
+    tempContainer.appendChild(date);
+  
+    // Clonar el elemento a convertir y añadirlo al contenedor temporal
+    const clonedElement = $elementoParaConvertir.cloneNode(true);
+    tempContainer.appendChild(clonedElement);
+  
+    // Eliminar la primera fila
+    const firstRow = clonedElement.querySelector('tr');
+    if (firstRow) {
+      firstRow.parentNode.removeChild(firstRow);
+    }
+  
+    // Eliminar la última columna
+    const rows = clonedElement.querySelectorAll('tr');
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td, th');
+      if (cells.length > 0) {
+        cells[cells.length - 1].parentNode.removeChild(cells[cells.length - 1]);
+      }
+    });
+  
+    // Aplicar estilo al contenedor temporal para evitar problemas de renderizado
+    tempContainer.style.fontFamily = 'Arial, sans-serif';
+    tempContainer.style.width = '100%';
+    tempContainer.style.overflow = 'hidden';
+  
+    // Aplicar estilo a la tabla para ajustarla al tamaño del PDF
+    const tables = tempContainer.getElementsByTagName('table');
+    for (let table of tables) {
+      table.style.width = '100%'; // Ajustar el ancho de la tabla al 100%
+      table.style.tableLayout = "auto"; // Opcional: esto hace que las celdas tengan un ancho fijo
+    }
+  
+    // Ajustar el tamaño de las celdas de la tabla
+    const tableCells = tempContainer.getElementsByTagName('td');
+    for (let cell of tableCells) {
+      cell.style.fontSize = '10px'; // Reducir el tamaño de la fuente en las celdas
+      cell.style.padding = '1px'; // Reducir el padding en las celdas
+    }
+  
+    const tableCellsth = tempContainer.getElementsByTagName('th');
+    for (let cell of tableCellsth) {
+      cell.style.fontSize = '10px'; // Reducir el tamaño de la fuente en las celdas
+      cell.style.padding = '1px'; // Reducir el padding en las celdas
+    }
+  
+    html2pdf()
+        .from(tempContainer)
+        .set({
+            margin: 1,
+            filename: 'venta.pdf',
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 4, // A mayor escala, mejores gráficos, pero más peso
+                letterRendering: true,
+            },
+            jsPDF: {
+                unit: "in",
+                format: "a4",
+                orientation: 'landscape' // landscape o portrait
+            }
+        })
+        .outputPdf('blob')
+        .then(function (pdfBlob) {
+            var blobUrl = URL.createObjectURL(pdfBlob);
+            window.open(blobUrl, '_blank');
+        })
+        .catch(err => console.log(err));
   }
+
+
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -380,6 +470,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnUsuarioListar = document.getElementById("btnUsuarioListar");
   let modificarUsuario = document.getElementById("modificarUsuario");
   let btnUsuarioLoad = document.getElementById("btnUsuarioLoad");
+
+  let imprimirUsuarios= document.getElementById("imprimirUsuarios");
+
 
   let resetearUsuario =document.getElementById("resetearUsuario")
   let habilitarUsuario = document.getElementById("habilitarUsuario");
@@ -394,6 +487,9 @@ document.addEventListener("DOMContentLoaded", () => {
       userController.save()
       userController.list()
     })
+
+    imprimirUsuarios.onclick=userController.print
+
     // btnUsuarioAlta.onclick = userController.save;
     btnUsuarioListar.onclick = userController.list;
     btnUsuarioLoad.onclick = userController.load;

@@ -91,16 +91,19 @@
 
   </form>
   <div class="col-8 p-4">
-    <table class="table table-dark">
+    <table id="tablaCliente" class="table table-dark">
       <thead>
 
         <tr>
           <th colspan="9">
-            Listado de Usuarios
+            Listado de Clientes
           </th>
 
           <th colspan="2">
+            
+            <button type="button" id="imprimirClientes"> Imprimir clientes</button>
             <a target="_blank" href="<?= APP_FRONT . "cliente/pdf" ?>">Generar PDF</a>
+
           </th>
 
 
@@ -113,7 +116,7 @@
           <th scope="col">dni</th>
           <th scope="col">cuit</th>
           <th scope="col">tipo</th>
-          <th scope="col">provinciaId</th>
+          <th scope="col">provincia</th>
           <th scope="col">localidad</th>
           <th scope="col">telefono</th>
           <th scope="col">correo</th>
