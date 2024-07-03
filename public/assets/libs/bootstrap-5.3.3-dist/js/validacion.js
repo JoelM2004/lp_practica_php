@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     tipo.onchange=toggleInputs;
     toggleInputs
-  }else{
+  }else if(tipoMOD!=null){
 
     tipoMOD.onchange=toggleInputsMOD
     toggleInputsMOD

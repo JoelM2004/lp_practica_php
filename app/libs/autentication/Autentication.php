@@ -50,7 +50,7 @@ final class Autentication
         }
 
         if ($cuenta['resetear'] !== 0) {
-            throw new \Exception("Su cuenta caducada");
+            throw new \Exception("Su cuenta está caducada");
         }
 
         // Pasó las validaciones, la cuenta es válida

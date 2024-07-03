@@ -5,7 +5,7 @@
 
 <div class="mb-3">
       <label for="buscarPerfil" class="form-label">Buscar Perfil</label>
-      <input type="text" class="form-control" id="buscarPerfil">
+      <input type="number" class="form-control" id="buscarPerfil">
       <button  id="btnPerfilLoad" type="button" class="btn btn-primary mt-3">Buscar</button>
       <button id="btnPerfilListar" type="button" class="btn btn-primary mt-3">Listar todos los perfiles</button>
     </div>

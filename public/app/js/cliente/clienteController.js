@@ -127,6 +127,12 @@ let clienteController = {
 
   load: () => {
     const id = document.getElementById("buscarCliente").value; // Suponiendo que tienes un input con este ID
+    if(id==""||id<0){
+
+      alert("Introduzca un valor válido")
+
+    }else{
+
 
     clienteService
       .load(id)
@@ -181,7 +187,7 @@ let clienteController = {
       .catch((error) => {
         console.error("Error al cargar cliente:", error);
       });
-  },
+  }},
   
   delete: () => {
     if (confirm("Quiere eliminar el perfil?")) {
@@ -391,10 +397,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     btnimprimirClientes.onclick=clienteController.print
-
     btnClienteBuscar.onclick = clienteController.load;
     btnPerfilLoad.onclick = clienteController.list;
-  } else {
+  } else
+  
+    if(btnEliminarClientes!=null)
+  {
     btnmodificarCliente.onclick = clienteController.update;
     btnEliminarClientes.onclick = clienteController.delete;
   }

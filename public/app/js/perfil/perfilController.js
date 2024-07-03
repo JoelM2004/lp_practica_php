@@ -82,7 +82,15 @@ let perfilController = {
   },
 
   load: () => {
-    const id = document.getElementById("buscarPerfil").value; // Suponiendo que tienes un input con este ID
+
+    const id= document.getElementById("buscarPerfil").value; // Suponiendo que tienes un input con este ID
+    
+    if(id<0||id==""){
+
+      alert("Introduzca un valor válido")
+
+    }else{
+    
     perfilService
       .load(id)
       .then((data) => {
@@ -112,7 +120,8 @@ let perfilController = {
       .catch((error) => {
         console.error("Error al listar perfiles:", error);
       });
-  },
+    }
+},
 
   list: () => {
     console.log("Listando perfiles...");
@@ -160,7 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     btnPerfilBuscar.onclick = perfilController.load;
     btnPerfilLoad.onclick = perfilController.list;
-  } else {
+  } else if(btnmodificarPerfil!=null){
+    
     btnmodificarPerfil.onclick = perfilController.update;
     btnEliminarPerfiles.onclick = perfilController.delete;
   }

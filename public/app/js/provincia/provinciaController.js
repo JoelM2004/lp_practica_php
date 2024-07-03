@@ -138,9 +138,11 @@ let provinciaController={
       })
         btnProvinciaBuscar.onclick = provinciaController.load;
         btnprovinciaLoad.onclick = provinciaController.list;
-      } else {
+      } else if(btnmodificarprovincia!=null) {
+
         btnmodificarprovincia.onclick = provinciaController.update;
         btnEliminarprovinciaes.onclick = provinciaController.delete;
         // btnUsuarioListar.onclick=userController.list;
+      
       }
     });

@@ -207,6 +207,12 @@ let userController = {
 
     const id = document.getElementById("buscarUsuario").value; // Obtener el ID del usuario desde el input
 
+    if(id==""||id<0){
+
+      alert("Introduzca un valor válido")
+
+    }{
+
     userService
       .load(id)
       .then((data) => {
@@ -259,7 +265,9 @@ let userController = {
       .catch((error) => {
         console.error("Error al cargar usuario:", error);
       });
-  },
+  }
+
+},
 
 
   enable: () => {

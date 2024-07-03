@@ -4,7 +4,7 @@
 
     <div class="input-group mb-3">
       <button class="btn btn-primary" type="button" id="btnClienteLoad">Buscar</button>
-      <input id="buscarCliente" type="text" class="form-control" placeholder="Escriba el ID del Perfil" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      <input id="buscarCliente" type="number" class="form-control" placeholder="Escriba el ID del Cliente" aria-label="Example text with button addon" aria-describedby="button-addon1">
     </div>
 
 

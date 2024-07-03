@@ -65,7 +65,7 @@ final class UsuarioDAO extends DAO implements InterfaceDAO{
     public function update(InterfaceDTO $object): void {
         $this->validate($object);
         $this->validateCorreo($object);
-        
+        $this->validateCuenta($object);
         // $object =parse_ini_file(UsuarioDTO,$object);
 
         $sql = "UPDATE {$this->table} 
