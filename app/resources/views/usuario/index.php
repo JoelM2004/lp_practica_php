@@ -10,7 +10,7 @@
       <div class="carousel-caption d-none d-md-block">
         <h2>Usuario</h2>
         <p>
-          <a href="<?=APP_FRONT."usuario/create/0" ?>">
+          <a href="<?=APP_FRONT."usuario/create/0" ?>" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
             Ver Usuarios
           </a>
         </p>
@@ -21,7 +21,7 @@
       <div class="carousel-caption d-none d-md-block">
         <h2>Perfil</h2>
         <p>
-          <a href="<?=APP_FRONT."perfil/create/0" ?>">
+          <a href="<?=APP_FRONT."perfil/create/0" ?>" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
             Ver Perfiles
           </a>
         </p>
@@ -32,7 +32,7 @@
       <div class="carousel-caption d-none d-md-block">
         <h2>Cliente</h2>
         <p>
-          <a href="<?=APP_FRONT."cliente/create/0" ?>">
+          <a href="<?=APP_FRONT."cliente/create/0" ?>" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
             Ver Clientes
           </a>
         </p>

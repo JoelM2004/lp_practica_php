@@ -101,7 +101,7 @@
   </form>
 
   <div class="col-1 p-10">
-    <table id="tablaUsuario" class="table table-dark">
+    <table id="tablaUsuario" class="table table-light">
       <thead>
         <tr>
           <th colspan="9">

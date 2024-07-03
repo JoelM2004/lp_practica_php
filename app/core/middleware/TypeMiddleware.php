@@ -25,6 +25,7 @@ final class TypeMiddleware extends Middleware implements MiddlewareInterface {
 
         if ((isset($_SESSION["token"]) || $_SESSION["token"]===APP_TOKEN)&&$request->getController()=="autenticacion"){
             header("refresh:0.1;url=" . APP_FRONT . "inicio/index");
+            // die();
        }
 
         // Verificar si el usuario tiene permisos para la ruta específica
@@ -34,7 +35,7 @@ final class TypeMiddleware extends Middleware implements MiddlewareInterface {
         } else {
             // Si no tiene permiso,lo patea
             header("refresh:0.1;url=" . APP_FRONT . "inicio/index");
-
+            
         }
     }
 

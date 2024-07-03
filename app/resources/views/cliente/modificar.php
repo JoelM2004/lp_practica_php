@@ -103,7 +103,7 @@
 
   </form>
   <div class="col-8 p-4">
-    <table class="table table-dark">
+    <table class="table table-light">
       <thead >
       <tr>
           <th colspan="11">

@@ -91,7 +91,7 @@
 
   </form>
   <div class="col-8 p-4">
-    <table id="tablaCliente" class="table table-dark">
+    <table id="tablaCliente" class="table table-light">
       <thead>
 
         <tr>
