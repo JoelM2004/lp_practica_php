@@ -12,14 +12,14 @@ final class TypeMiddleware extends Middleware implements MiddlewareInterface {
     public function handler(Request $request, Response $response): void {
         // Verificar si la variable de sesión 'perfilId' existe
         if (isset($_SESSION["perfil"])) {
-            $id = $_SESSION["perfil"];
+            $perfil = $_SESSION["perfil"];
         } else {
             $this->next($request, $response);
             return;
         }
 
         // Establecer el tipo de usuario en el request
-        $request->setTipoUsuario($_SESSION["perfil"]);
+        $request->setTipoUsuario($perfil);
         // Obtener la ruta actual
         $ruta = $request->getController() . '/' . $request->getAction();
 
@@ -28,11 +28,11 @@ final class TypeMiddleware extends Middleware implements MiddlewareInterface {
        }
 
         // Verificar si el usuario tiene permisos para la ruta específica
-        if ($this->tienePermiso($_SESSION["perfil"], $ruta)) {
+        if ($this->tienePermiso($perfil, $ruta)) {
             // Pasar el control al siguiente middleware
             $this->next($request, $response);
         } else {
-            // Si no tiene permiso, devolver una respuesta de error
+            // Si no tiene permiso,lo patea
             header("refresh:0.1;url=" . APP_FRONT . "inicio/index");
 
         }

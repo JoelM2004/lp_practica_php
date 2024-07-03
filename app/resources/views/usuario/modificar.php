@@ -45,23 +45,14 @@ $datosPerfiles = $daoPerfil->list();
     <div class="mb-3">
       <label for="perfilIdMod" class="form-label">Perfil del Usuario</label>
       <select name="perfilIdMod" class="form-select" id="perfilIdMod" aria-label="Seleccione...">
-
         <?php
-        $txt = ''; // Inicializar $txt antes del bucle
-
         foreach ($datosPerfiles as $elemento) {
-          $txt .= '<option value="' . $elemento['id'] . '">' . $elemento['nombre'] . '</option>';
+          $selected = $datos->getPerfilId() == $elemento['id'] ? 'selected' : '';
+          echo '<option value="' . $elemento['id'] . '" ' . $selected . '>' . $elemento['nombre'] . '</option>';
         }
-
-        echo $txt;
         ?>
-
       </select>
-
     </div>
-
-
-
 
     <!-- <div class="mb-3">
       <label for="estadoUsuarioMod" class="form-label">Estado del Usuario</label>

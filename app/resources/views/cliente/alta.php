@@ -25,7 +25,7 @@
 
     <div class="mb-3">
       <label for="dniCliente" class="form-label">DNI del Cliente</label>
-      <input type="number" class="form-control" id="dniCliente">
+      <input type="number" class="form-control" id="dniCliente" disabled>
     </div>
 
     <div class="mb-3">
@@ -36,7 +36,7 @@
 
     <div class="mb-3">
       <label class="form-label">Tipo de Cliente</label>
-      <select id="tipoCliente" class="form-select" aria-label="Default select example">
+      <select  id="tipoCliente" class="form-select" aria-label="Default select example">
         <option value="Empresa">Empresa</option>
         <option value="Persona">Persona</option>
       </select>
@@ -101,8 +101,8 @@
 
           <th colspan="2">
             
-            <button type="button" id="imprimirClientes"> Imprimir clientes</button>
-            <a target="_blank" href="<?= APP_FRONT . "cliente/pdf" ?>">Generar PDF</a>
+            <button type="button" id="imprimirClientes" class="btn btn-success"> PDF clientes</button>
+            <!-- <a target="_blank" href="<?= APP_FRONT . "cliente/pdf" ?>">Generar PDF</a> -->
 
           </th>
 

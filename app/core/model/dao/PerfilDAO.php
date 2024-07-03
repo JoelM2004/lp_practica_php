@@ -58,6 +58,8 @@ final class PerfilDAO extends DAO implements InterfaceDAO
     }
     public function delete($id):void{
 
+        $this->validateUsuarios($id);
+
         $sql="DELETE FROM {$this->table} WHERE id= :id";
         $stmt=$this ->conn->prepare($sql);
         $stmt->execute([
@@ -75,6 +77,27 @@ final class PerfilDAO extends DAO implements InterfaceDAO
 
         
     }
+
+    public function listID():array{
+        $sql = "SELECT id FROM {$this->table}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+
+    private function validateUsuarios($id): void {
+        $sql = "SELECT COUNT(id) AS cantidad FROM usuarios WHERE perfilId = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_OBJ);
+    
+        if ($result->cantidad > 0) {
+            throw new \Exception("No se puede eliminar ya que hay algun usuario que tiene este perfil");
+        }
+    }
+
 
 
     private function validate(PerfilDTO $object):void{

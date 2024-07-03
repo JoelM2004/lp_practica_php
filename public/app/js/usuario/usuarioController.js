@@ -128,7 +128,9 @@ let userController = {
           alert("Error al actualizar el user: " + data.error);
         } else {
           alert("user actualizado con éxito");
-          
+          setTimeout(() => {
+            location.reload();
+           }, 300);
         }
 
       }).catch((error)=>{

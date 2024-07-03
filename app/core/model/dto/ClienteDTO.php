@@ -119,7 +119,7 @@ final class ClienteDTO implements InterfaceDTO
 
     public function setCUIT($cuenta): void
     {
-        $this->cuit = is_string($cuenta) && (preg_match('/^[0-9]{5,11}$/', $cuenta))
+        $this->cuit = is_string($cuenta) && (preg_match('/^[0-9]{8,11}$/', $cuenta))
             ? $cuenta
             : "";
     }

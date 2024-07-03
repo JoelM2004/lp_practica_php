@@ -22,14 +22,8 @@ final class ClienteController extends Controller implements ControllerInterface{
     }
 
     public function pdf():void{
-        $this->view = "cliente/pdf.php";
-        $titulo="Listado Cliente";
-
-        $breadcrumbActual="";
-        $breadcrumbLink=APP_FRONT."";
-        $breadcrumbPasada="";
-
-        require_once APP_TEMPLATE."template.php";
+        require_once('C:\\xampp\\htdocs\\lp_practica_php\\app\\reports\\testReport.php');
+        // $this->view = "cliente/pdf.php";
     }
 
 

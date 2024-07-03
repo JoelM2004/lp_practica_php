@@ -31,35 +31,35 @@ let perfilService = {
       });
   },
 
-
   delete: (data) => {
-    fetch("perfil/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-
-      body: JSON.stringify(data),
+    return fetch("perfil/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(data),
     })
-      .then((response) => {
+    .then((response) => {
         if (!response.ok) {
-          throw new Error(response.status);
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         return response.json();
-      })
-      .then((data) => {
-        if ((data.error = "")) {
-          console.log("Error Interno");
+    })
+    .then((data) => {
+        if (data.error) {
+            console.error("Error Interno:", data.error);
+            throw new Error(data.error); // Lanzar error para ser capturado en el catch
         } else {
-          console.info("todo bien");
+            console.info("Operación exitosa");
+            return data; // Devolver datos en caso de éxito
         }
-      })
-      .catch((error) => {
-        console.error("Error en la Petición ", error);
-      });
-  },
+    })
+    .catch((error) => {
+        console.error("Error en la Petición:", error);
+        throw new Error("Existe un usuario que utiliza este perfil"); // Lanzar error general
+    });
+},
 
   load: (id) => {
     return fetch(`perfil/load/${id}`, {

@@ -19,10 +19,16 @@ final class ClienteDAO extends DAO implements InterfaceDAO
     public function save(InterfaceDTO $object): void
     {
 
+        if($object->getTipo()==="Empresa"){
+            $this->validateLenCUIT($object);
+            $this->validateCUIT($object);
+        }else{
+            $this->validateLenDNI($object);
+            $this->validateDNI($object);
+        }
+
         $this->validate($object);
-        $this->validateDNI($object);
         $this->validateCorreo($object);
-        $this->validateCUIT($object);
 
         $sql = "INSERT INTO {$this->table} VALUES(DEFAULT,:apellido,:nombre,:dni,:cuit,:tipo,:provinciaId,:localidad,:telefono,:correo)"; //:apellido, variable reemplazada por un dato, o una consulta preparada
         $stmt = $this->conn->prepare($sql);
@@ -55,11 +61,17 @@ final class ClienteDAO extends DAO implements InterfaceDAO
 
     public function update(InterfaceDTO $object): void
     {
-        
+        if($object->getTipo()==="Empresa"){
+            $this->validateLenCUIT($object);
+            $this->validateCUIT($object);
+        }else{
+            $this->validateLenDNI($object);
+            $this->validateDNI($object);
+            
+        }
+
         $this->validate($object);
-        $this->validateDNI($object);
         $this->validateCorreo($object);
-        $this->validateCUIT($object);
 
         $sql = "UPDATE {$this->table} SET apellido=:apellido,nombre=:nombre,dni=:dni,cuit=:cuit,tipo=:tipo,provinciaId=:provinciaId,localidad=:localidad,telefono=:telefono,correo=:correo WHERE id= :id";
 
@@ -89,6 +101,12 @@ final class ClienteDAO extends DAO implements InterfaceDAO
         
     }
 
+    public function listID():array{
+        $sql = "SELECT id FROM {$this->table}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     
 
     private function validate(ClienteDTO $object): void
@@ -103,8 +121,8 @@ final class ClienteDAO extends DAO implements InterfaceDAO
         'getLocalidad',
         'getCorreo',
         'getProvinciaId',
-        'getDNI',
-        'getCuit'
+        // 'getDNI',
+        // 'getCuit'
         
     ];
 
@@ -114,6 +132,25 @@ final class ClienteDAO extends DAO implements InterfaceDAO
         }
     }
 }
+
+private function validateLenCUIT(ClienteDTO $object):void{
+
+    if($object->getCuit()==""){
+        throw new \Exception("Está introduciendo un CUIL que tiene un formato incorrecto");
+    }
+
+}
+
+private function validateLenDNI(ClienteDTO $object):void{
+
+    if($object->getDNI()==""){
+        throw new \Exception("Está introduciendo un DNI que tiene un formato incorrecto");
+    }
+
+}
+
+
+
 
 
     private function validateCorreo(ClienteDTO $object): void

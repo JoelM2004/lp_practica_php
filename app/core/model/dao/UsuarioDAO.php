@@ -38,6 +38,13 @@ final class UsuarioDAO extends DAO implements InterfaceDAO{
         // $this->conn->exec($sql);
     }
 
+    public function listID():array{
+        $sql = "SELECT id FROM {$this->table}";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function load($id):UsuarioDTO{
 
         $sql="SELECT id,apellido,nombres,cuenta,clave,correo,perfilId,estado,horaEntrada,horaSalida,fechaAlta,resetear FROM {$this->table} WHERE id = :id";

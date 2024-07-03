@@ -1,19 +1,54 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-    'use strict'
+
+  function toggleInputs(){
+    var tipo = document.getElementById("tipoCliente").value;
+    var cuitInput = document.getElementById("cuitCliente");
+    var dniInput = document.getElementById("dniCliente");
+    if (tipo === "Empresa") {
+        cuitInput.disabled = false;
+        dniInput.disabled = true;
+        dniInput.value=""
+    } else {
+        cuitInput.disabled = true;
+        dniInput.disabled = false;
+        cuitInput.value="";
+      }
+}
+
+function toggleInputsMOD(){
+  var tipo = document.getElementById("tipoClienteMOD").value;
+  var cuitInput = document.getElementById("cuitClienteMOD");
+  var dniInput = document.getElementById("dniClienteMOD");
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.from(forms).forEach(form => {
-      form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-  
-        form.classList.add('was-validated')
-      }, false)
-    })
-  })()
+  if (tipo === "Empresa") {
+      cuitInput.disabled = false;
+      dniInput.disabled = true;
+      dniInput.value=""
+  } else {
+      cuitInput.disabled = true;
+      dniInput.disabled = false;
+      cuitInput.value="";
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  let tipo= document.getElementById("tipoCliente")
+  let tipoMOD= document.getElementById("tipoClienteMOD")
+
+
+  if(tipo!=null){
+
+    tipo.onchange=toggleInputs;
+    toggleInputs
+  }else{
+
+    tipoMOD.onchange=toggleInputsMOD
+    toggleInputsMOD
+
+  }
+
+
+}
+)

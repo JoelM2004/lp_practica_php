@@ -1,25 +1,21 @@
 let perfilController = {
   data: {
-    id: 0,
+    id: 59,
     nombre: "",
   },
 
   save: () => {
     if (confirm("Quieres crear el perfil?")) {
       let perfilForm = document.forms["perfilForm"];
-      
-      
-      if( (perfilForm.nombrePerfil.value).length >45 ){
 
+      if (perfilForm.nombrePerfil.value.length > 45) {
         alert("Nombre demasiado largo");
-
-      }else{
+      } else {
         perfilController.data.nombre = perfilForm.nombrePerfil.value;
       }
-      
 
-
-      perfilService.save(perfilController.data)
+      perfilService
+        .save(perfilController.data)
         .then((data) => {
           console.log("Guardando Datos");
           // Aquí puedes manejar la respuesta
@@ -36,40 +32,52 @@ let perfilController = {
           alert("Ocurrió un error al guardar el perfil");
         });
     }
-
   },
 
   delete: () => {
-    if (confirm("Quiere eliminar el perfil?")) {
-      perfilController.data.id = document.getElementById("filaModificarPerfil").dataset.id;
-      perfilService.delete(perfilController.data);
-      console.log("Datos Borrados");
+    if (confirm("¿Quiere eliminar el perfil?")) {
+      perfilController.data.id = document.getElementById(
+        "filaModificarPerfil"
+      ).dataset.id;
+
+      perfilService
+        .delete(perfilController.data)
+        .then((data) => {
+          alert(data.mensaje); // Muestra el mensaje del servidor al usuario
+        })
+        .catch((error) => {
+          console.error("Error al eliminar el Perfil:", error);
+          alert(
+            "Hubo un problema al eliminar el Perfil. Por favor, inténtelo de nuevo más tarde."+ error
+          );
+        });
     }
   },
 
   update: () => {
     if (confirm("Quieres modificar el perfil?")) {
-      
-      perfilController.data.id =document.getElementById("filaModificarPerfil").dataset.id;
-      perfilController.data.id=parseInt(perfilController.data.id);
-      perfilController.data.nombre =document.getElementById("nombrePerfil").value;
+      perfilController.data.id = document.getElementById(
+        "filaModificarPerfil"
+      ).dataset.id;
+      perfilController.data.id = parseInt(perfilController.data.id);
+      perfilController.data.nombre =
+        document.getElementById("nombrePerfil").value;
 
-      perfilService.update(perfilController.data)
-        .then((data)=>{
+      perfilService
+        .update(perfilController.data)
+        .then((data) => {
           console.log("Actualizando Datos");
           // Aquí puedes manejar la respuesta
           if (data.error !== "") {
             alert("Error al actualizar el perfil: " + data.error);
           } else {
             alert("Perfil actualizado con éxito");
-            
           }
-
-        }).catch((error)=>{
+        })
+        .catch((error) => {
           console.error("Error en la Petición ", error);
           alert("Ocurrió un error al actualizar el perfil");
-        })
-    
+        });
     }
   },
 
@@ -83,7 +91,7 @@ let perfilController = {
         // perfilController.data.id=data.data.id;
         // perfilController.data.nombre=data.data.nombre;
 
-        if (data.error==="") {
+        if (data.error === "") {
           let tabla = document.getElementById("tbodyPerfiles");
           let txt = "";
 
@@ -106,8 +114,6 @@ let perfilController = {
       });
   },
 
-
-  
   list: () => {
     console.log("Listando perfiles...");
 
@@ -139,7 +145,6 @@ let perfilController = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-
   let btnPerfilAlta = document.getElementById("btnPerfilAlta");
   let btnPerfilBuscar = document.getElementById("btnPerfilLoad");
   let btnEliminarPerfiles = document.getElementById("btnEliminarPerfiles");
@@ -147,18 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnPerfilLoad = document.getElementById("btnPerfilListar");
 
   if (btnPerfilAlta != null) {
-    perfilController.list()
+    perfilController.list();
 
-
-    btnPerfilAlta.addEventListener("click",function(){
+    btnPerfilAlta.addEventListener("click", function () {
       perfilController.save();
-      perfilController.list()
-    })
+      perfilController.list();
+    });
     btnPerfilBuscar.onclick = perfilController.load;
     btnPerfilLoad.onclick = perfilController.list;
   } else {
     btnmodificarPerfil.onclick = perfilController.update;
     btnEliminarPerfiles.onclick = perfilController.delete;
-    
   }
 });

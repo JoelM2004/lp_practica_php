@@ -3,8 +3,8 @@ let clienteController = {
     id: 0,
     apellido: "Mercado",
     nombre: "Joel",
-    dni: "45383601",
-    cuit: "45383612",
+    dni: "",
+    cuit: "",
     tipo: "Persona",
     provinciaId: 17,
     localidad: "Caleta Olivia",
@@ -12,10 +12,11 @@ let clienteController = {
     correo: "Joelmercado@gmail.com",
   },
 
+  
+
   save: () => {
     if (confirm("Quieres crear el cliente?")) {
       let form = document.forms["formCliente"];
-
 
       if((form.apellidoCliente.value).length>45){
         alert("Supero el limite de caracteres con su apellido")
@@ -25,11 +26,11 @@ let clienteController = {
         alert("Supero el limite de caracteres con su nombre")
       } else{clienteController.data.nombre = form.nombreCliente.value;}
 
-      if((form.dniCliente.value).length>=9||form.dniCliente.value.length<=6 ){
+      if((form.dniCliente.value).length>=9){
         alert("Escriba un DNI válido")
       }else{clienteController.data.dni = form.dniCliente.value; }
 
-      if((form.cuitCliente.value).length>=12||form.cuitCliente.value.length<=9 ){
+      if((form.cuitCliente.value).length>=12){
         alert("Escriba un CUIT válido")
       }else{clienteController.data.cuit = form.cuitCliente.value }
       
@@ -69,6 +70,7 @@ let clienteController = {
       // }, 300);
     }
   },
+
   list: () => {
     console.log("Listando Clientes...");
 
@@ -230,11 +232,11 @@ let clienteController = {
         alert("Supero el limite de caracteres con su nombre")
       } else{clienteController.data.nombre = form.nombreClienteMOD.value;}
 
-      if((form.dniClienteMOD.value).length>=9||form.dniClienteMOD.value.length<=6 ){
+      if((form.dniClienteMOD.value).length>=9 ){
         alert("Escriba un DNI válido")
       }else{clienteController.data.dni = form.dniClienteMOD.value; }
 
-      if((form.cuitClienteMOD.value).length>=12||form.cuitClienteMOD.value.length<=9 ){
+      if((form.cuitClienteMOD.value).length>=12 ){
         alert("Escriba un CUIT válido")
       }else{clienteController.data.cuit = form.cuitClienteMOD.value }
   
@@ -264,13 +266,19 @@ let clienteController = {
         } else {
           alert("Cliente actualizado con éxito");
           
+          setTimeout(() => {
+         location.reload();
+        }, 300);
+          
         }
 
       }).catch((error)=>{
         console.error("Error en la Petición ", error);
-        alert("Ocurrió un error al actualizar el cliente");
+        alert("Ocurrió un error al actualizar el cliente "+ error);
       })
     }
+
+
 }
 ,
 
@@ -371,6 +379,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnmodificarCliente = document.getElementById("btnModificarCliente");
   let btnPerfilLoad = document.getElementById("btnClienteListar");
   let btnimprimirClientes= document.getElementById("imprimirClientes")
+  // let tipo= document.getElementById("tipoCliente")
+
 
   if (btnClienteAlta != null) {
     clienteController.list();

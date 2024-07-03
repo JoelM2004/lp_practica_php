@@ -16,8 +16,11 @@ final class RoutingMiddleware extends Middleware implements MiddlewareInterface{
         $controllerName = 'app\\core\\controller\\' . ucfirst($request->getController()) . 'Controller';
 
         if(!class_exists($controllerName) || !method_exists($controllerName, $request->getAction())){
-            throw new \Exception("Controlador y/o acción incorrectos");
+
+            header("refresh:0.1;url=" . APP_FRONT . "inicio/index");
+        
         }
+
 
         $response->setController($request->getController());
         $response->setAction($request->getAction());

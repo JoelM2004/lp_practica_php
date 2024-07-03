@@ -109,8 +109,8 @@
           </th>
 
           <th colspan="2">
-          <button type="button" id="imprimirUsuarios"> Imprimir Usuarios</button>
-            <a target="_blank" href="<?= APP_FRONT . "usuario/pdf" ?>">Generar PDF</a>
+          <button type="button" id="imprimirUsuarios" class="btn btn-success" > PDF Usuarios</button>
+            <!-- <a target="_blank" href="<?= APP_FRONT . "usuario/pdf" ?>">Generar PDF</a> -->
           </th>
 
 

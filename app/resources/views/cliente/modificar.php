@@ -32,42 +32,54 @@
 
     <div class="mb-3">
       <label for="dniClienteMOD" class="form-label">DNI del Cliente</label>
-      <input type="number" class="form-control" id="dniClienteMOD" value=<?=$datos->getDNI()?>>
+      <input type="number" class="form-control" id="dniClienteMOD" 
+      
+      <?php 
+        if($datos->getTipo()==="Empresa") echo "disabled";
+      ?>
+      
+      value=<?=$datos->getDNI()?>>
     </div>
 
     <div class="mb-3">
       <label for="cuitClienteMOD" class="form-label">CUIT del Cliente</label>
-      <input type="number" class="form-control" id="cuitClienteMOD" value=<?=$datos->getCuit()?>>
+      <input type="number" class="form-control" id="cuitClienteMOD"
+
+      <?php 
+        if($datos->getTipo()==="Persona") echo "disabled";
+      ?>
+      
+      value=<?=$datos->getCuit()?>>
     </div>
 
 
     <div class="mb-3">
-    <label class="form-label">Tipo de Cliente</label>
-    <select id="tipoClienteMOD" class="form-select" aria-label="Seleccione...">
-      <option value="Empresa">Empresa</option>
-      <option value="Persona">Persona</option>
-    </select>
+      <label class="form-label">Tipo de Cliente</label>
+      <select id="tipoClienteMOD" class="form-select" aria-label="Seleccione...">
+        <option value="Empresa" <?= $datos->getTipo() === 'Empresa' ? 'selected' : '' ?>>Empresa</option>
+        <option value="Persona" <?= $datos->getTipo() === 'Persona' ? 'selected' : '' ?>>Persona</option>
+      </select>
     </div>
     
 
 
     <div class="mb-3">
-    <label for="provinciaClienteMOD" class="form-label">Id de la Provincia</label>
-    <select name="provinciaClienteMOD" class="form-select" id="provinciaClienteMOD" aria-label="Seleccione...">
-        
-    <?php
-    $txt = ''; // Inicializar $txt antes del bucle
+      <label for="provinciaClienteMOD" class="form-label">Id de la Provincia</label>
+      <select name="provinciaClienteMOD" class="form-select" id="provinciaClienteMOD" aria-label="Seleccione...">
+        <?php
+        $txt = ''; // Inicializar $txt antes del bucle
 
-    foreach ($datosProvincia as $elemento) {
-      $txt .= '<option value="' . $elemento['id'] . '">' . $elemento['nombre'] . '</option>';
-    }
+        foreach ($datosProvincia as $elemento) {
 
-    echo $txt;
-    ?>
+          $selected = $datos->getProvinciaId() == $elemento['id'] ? 'selected' : '';
 
-    </select>
+          $txt .= '<option value="' . $elemento['id'] . '" ' . $selected . '>' . $elemento['nombre'] . '</option>';
+        }
 
-  </div>
+        echo $txt;
+        ?>
+      </select>
+    </div>
 
 
 
